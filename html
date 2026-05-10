@@ -1,537 +1,1005 @@
-# INSS- Clara
-
-Crie um arquivo chamado `index.html` no GitHub e cole o código abaixo.
-
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TJ-OS Multi Edital</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>INSS Clara </title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-:root{
---bg:#f5f7fb;
---card:#ffffff;
---text:#111827;
---border:#e5e7eb;
---muted:#6b7280;
---primary:#111827;
---blue:#3b82f6;
---green:#16a34a;
---yellow:#eab308;
---red:#dc2626;
-}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-body{
-font-family:'DM Sans',sans-serif;
-background:var(--bg);
-color:var(--text);
-}
+  <style>
 
-h1,h2,h3,h4,button{
-font-family:'Outfit',sans-serif;
-}
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
-.container{
-max-width:1400px;
-margin:auto;
-padding:25px;
-}
+    :root{
+      --bg:#f4f7fb;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --primary:#2563eb;
 
-.top{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:20px;
-flex-wrap:wrap;
-gap:20px;
-}
+      --green:#16a34a;
+      --yellow:#eab308;
+      --red:#dc2626;
 
-.card{
-background:var(--card);
-padding:20px;
-border-radius:18px;
-border:1px solid var(--border);
-box-shadow:0 4px 10px rgba(0,0,0,.05);
-}
+      --shadow:0 4px 14px rgba(0,0,0,.06);
+    }
 
-.tabs{
-display:flex;
-gap:10px;
-margin-bottom:20px;
-flex-wrap:wrap;
-}
+    body.dark{
+      --bg:#0f172a;
+      --card:#111827;
+      --text:#f3f4f6;
+      --muted:#94a3b8;
+      --border:#1f2937;
+      --shadow:0 4px 14px rgba(0,0,0,.4);
+    }
 
-.tab-btn{
-padding:12px 18px;
-border:none;
-border-radius:12px;
-background:white;
-cursor:pointer;
-font-weight:600;
-border:1px solid var(--border);
-}
+    body{
+      background:var(--bg);
+      color:var(--text);
+      font-family:'DM Sans',sans-serif;
+      transition:.3s;
+    }
 
-.tab-btn.active{
-background:var(--primary);
-color:white;
-}
+    h1,h2,h3,h4,button{
+      font-family:'Outfit',sans-serif;
+    }
 
-.tab-content{
-display:none;
-}
+    .container{
+      max-width:1500px;
+      margin:auto;
+      padding:25px;
+    }
 
-.tab-content.active{
-display:block;
-}
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:25px;
+      gap:20px;
+      flex-wrap:wrap;
+    }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:20px;
-}
+    .title h1{
+      font-size:2rem;
+    }
 
-input,select{
-width:100%;
-padding:12px;
-border-radius:10px;
-border:1px solid var(--border);
-margin-top:10px;
-margin-bottom:10px;
-font-family:'DM Sans';
-}
+    .title p{
+      color:var(--muted);
+    }
 
-button.action{
-background:var(--primary);
-color:white;
-padding:12px 16px;
-border:none;
-border-radius:10px;
-cursor:pointer;
-}
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:20px;
+      box-shadow:var(--shadow);
+    }
 
-.edital-item{
-padding:15px;
-border:1px solid var(--border);
-border-radius:14px;
-margin-top:10px;
-}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
 
-.badge{
-padding:5px 10px;
-border-radius:999px;
-font-size:.75rem;
-font-weight:700;
-color:white;
-}
+    .tabs{
+      display:flex;
+      gap:10px;
+      margin:25px 0;
+      flex-wrap:wrap;
+    }
 
-.blue{background:var(--blue);}
-.green{background:var(--green);}
-.yellow{background:var(--yellow);}
-.red{background:var(--red);}
+    .tab-btn{
+      border:none;
+      padding:12px 18px;
+      border-radius:12px;
+      cursor:pointer;
+      background:var(--card);
+      color:var(--text);
+      border:1px solid var(--border);
+      font-weight:600;
+    }
 
-.kanban{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-}
+    .tab-btn.active{
+      background:var(--primary);
+      color:white;
+    }
 
-.column{
-background:white;
-padding:15px;
-border-radius:16px;
-border:1px solid var(--border);
-min-height:400px;
-}
+    .tab{
+      display:none;
+    }
 
-.task{
-background:#f9fafb;
-padding:14px;
-border-radius:12px;
-border:1px solid var(--border);
-margin-bottom:10px;
-cursor:grab;
-}
+    .tab.active{
+      display:block;
+    }
 
-@media(max-width:768px){
-.kanban{
-grid-template-columns:1fr;
-}
-}
-</style>
+    input,select,textarea{
+      width:100%;
+      margin-top:10px;
+      margin-bottom:10px;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:var(--card);
+      color:var(--text);
+      font-family:'DM Sans';
+    }
+
+    button.action{
+      background:var(--primary);
+      color:white;
+      border:none;
+      padding:12px 16px;
+      border-radius:12px;
+      cursor:pointer;
+      margin-top:10px;
+    }
+
+    .kanban{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+
+    .column{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:15px;
+      min-height:500px;
+    }
+
+    .task{
+      background:var(--bg);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+      margin-bottom:10px;
+      cursor:grab;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:5px 10px;
+      border-radius:999px;
+      font-size:.75rem;
+      font-weight:700;
+      color:white;
+      margin-top:8px;
+    }
+
+    .green{
+      background:var(--green);
+    }
+
+    .yellow{
+      background:var(--yellow);
+      color:black;
+    }
+
+    .red{
+      background:var(--red);
+    }
+
+    .blue{
+      background:var(--primary);
+    }
+
+    .item{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:16px;
+      margin-top:12px;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      margin-top:10px;
+      flex-wrap:wrap;
+    }
+
+    .small{
+      padding:8px 12px;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+    }
+
+    .delete{
+      background:var(--red);
+      color:white;
+    }
+
+    .edit{
+      background:var(--yellow);
+    }
+
+    .stats{
+      font-size:2rem;
+      font-weight:700;
+      margin-top:10px;
+    }
+
+    canvas{
+      margin-top:20px;
+      background:var(--card);
+      border-radius:20px;
+      padding:15px;
+    }
+
+    @media(max-width:900px){
+
+      .kanban{
+        grid-template-columns:1fr;
+      }
+
+    }
+
+  </style>
 </head>
 <body>
 
 <div class="container">
 
-<div class="top">
-<div>
-<h1>TJ-OS Multi Edital</h1>
-<p>Sistema inteligente de estudos para concursos</p>
-</div>
+  <div class="topbar">
 
-<div class="card">
-<h3>Countdown</h3>
-<p id="countdown">Carregando...</p>
-</div>
-</div>
+    <div class="title">
+      <h1>StudyOS Multi Edital</h1>
+      <p>Plataforma inteligente de estudos</p>
+    </div>
 
-<div class="tabs">
-<button class="tab-btn active" onclick="openTab('dashboard',event)">Dashboard</button>
-<button class="tab-btn" onclick="openTab('planejamento',event)">Planejamento</button>
-<button class="tab-btn" onclick="openTab('materias',event)">Matérias</button>
-<button class="tab-btn" onclick="openTab('tempo',event)">Tempo</button>
-<button class="tab-btn" onclick="openTab('edital',event)">Edital</button>
-</div>
+    <div class="card">
+      <h3>Countdown</h3>
+      <p id="countdown">Nenhuma prova selecionada</p>
 
-<div id="dashboard" class="tab-content active">
-<div class="grid">
-<div class="card">
-<h3>Concurso Ativo</h3>
-<p id="concursoAtivo">Nenhum edital selecionado</p>
-</div>
+      <button class="action" onclick="toggleDark()">
+        Dark Mode
+      </button>
+    </div>
 
-<div class="card">
-<h3>Progresso</h3>
-<p id="progresso">0%</p>
-</div>
+  </div>
 
-<div class="card">
-<h3>Horas Estudadas</h3>
-<p id="horasTotal">00:00h</p>
-</div>
-</div>
-</div>
+  <div class="tabs">
 
-<div id="planejamento" class="tab-content">
-<div class="kanban">
+    <button class="tab-btn active" onclick="openTab('dashboard',event)">
+      Dashboard
+    </button>
 
-<div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
-<h3>Iniciado</h3>
-<div class="task" draggable="true" id="task1" ondragstart="drag(event)">
-Português - Interpretação
-</div>
-</div>
+    <button class="tab-btn" onclick="openTab('planejamento',event)">
+      Planejamento
+    </button>
 
-<div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
-<h3>Revisar</h3>
-</div>
+    <button class="tab-btn" onclick="openTab('materias',event)">
+      Matérias
+    </button>
 
-<div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
-<h3>Finalizado</h3>
-</div>
+    <button class="tab-btn" onclick="openTab('tempo',event)">
+      Tempo
+    </button>
 
-</div>
-</div>
+    <button class="tab-btn" onclick="openTab('edital',event)">
+      Edital
+    </button>
 
-<div id="materias" class="tab-content">
-<div class="card">
-<h3>Adicionar Matéria</h3>
+  </div>
 
-<input type="text" id="novaMateria" placeholder="Nome da matéria">
+  <!-- DASHBOARD -->
 
-<select id="incidencia">
-<option>Alta</option>
-<option>Média</option>
-<option>Baixa</option>
-</select>
+  <div id="dashboard" class="tab active">
 
-<button class="action" onclick="addMateria()">
-Adicionar Matéria
-</button>
+    <div class="grid">
 
-<div id="listaMaterias"></div>
-</div>
-</div>
+      <div class="card">
+        <h3>Edital Ativo</h3>
+        <div class="stats" id="ativoNome">
+          Nenhum
+        </div>
+      </div>
 
-<div id="tempo" class="tab-content">
-<div class="card">
-<h3>Tempo de Estudos</h3>
+      <div class="card">
+        <h3>Horas Estudadas</h3>
+        <div class="stats" id="horasTotal">
+          00:00h
+        </div>
+      </div>
 
-<input type="time" id="horas">
-<input type="number" id="questoes" placeholder="Questões">
-<input type="number" id="erros" placeholder="Erros">
+      <div class="card">
+        <h3>Matérias</h3>
+        <div class="stats" id="totalMaterias">
+          0
+        </div>
+      </div>
 
-<button class="action" onclick="salvarTempo()">
-Salvar
-</button>
+      <div class="card">
+        <h3>Questões</h3>
+        <div class="stats" id="totalQuestoes">
+          0
+        </div>
+      </div>
 
-<div id="historico"></div>
-</div>
-</div>
+    </div>
 
-<div id="edital" class="tab-content">
-<div class="card">
-<h3>Novo Edital</h3>
+    <canvas id="graficoHoras"></canvas>
 
-<input type="text" id="nomeConcurso" placeholder="Nome do concurso">
-<input type="text" id="banca" placeholder="Banca">
-<input type="text" id="cargo" placeholder="Cargo">
-<input type="date" id="dataProva">
+  </div>
 
-<button class="action" onclick="addEdital()">
-Salvar Edital
-</button>
+  <!-- PLANEJAMENTO -->
 
-<div id="listaEditais"></div>
-</div>
-</div>
+  <div id="planejamento" class="tab">
+
+    <div class="card">
+
+      <h3>Adicionar Tópico</h3>
+
+      <input type="text" id="tituloTask" placeholder="Título">
+
+      <select id="tipoEstudo">
+        <option>Questões</option>
+        <option>Aula</option>
+        <option>Leitura</option>
+      </select>
+
+      <button class="action" onclick="addTask()">
+        Adicionar
+      </button>
+
+    </div>
+
+    <br>
+
+    <div class="kanban">
+
+      <div class="column"
+      ondrop="drop(event)"
+      ondragover="allowDrop(event)"
+      data-status="Iniciado">
+
+        <h3>Iniciado</h3>
+
+      </div>
+
+      <div class="column"
+      ondrop="drop(event)"
+      ondragover="allowDrop(event)"
+      data-status="Revisar">
+
+        <h3>Revisar</h3>
+
+      </div>
+
+      <div class="column"
+      ondrop="drop(event)"
+      ondragover="allowDrop(event)"
+      data-status="Finalizado">
+
+        <h3>Finalizado</h3>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- MATÉRIAS -->
+
+  <div id="materias" class="tab">
+
+    <div class="card">
+
+      <h3>Nova Matéria</h3>
+
+      <input type="text" id="materiaNome" placeholder="Nome da matéria">
+
+      <select id="incidencia">
+        <option>Alta</option>
+        <option>Média</option>
+        <option>Baixa</option>
+      </select>
+
+      <button class="action" onclick="addMateria()">
+        Adicionar
+      </button>
+
+      <div id="listaMaterias"></div>
+
+    </div>
+
+  </div>
+
+  <!-- TEMPO -->
+
+  <div id="tempo" class="tab">
+
+    <div class="card">
+
+      <h3>Tempo de Estudos</h3>
+
+      <input type="time" id="horas">
+
+      <input type="number" id="questoes" placeholder="Questões">
+
+      <input type="number" id="erros" placeholder="Erros">
+
+      <button class="action" onclick="salvarTempo()">
+        Salvar
+      </button>
+
+      <div id="historico"></div>
+
+    </div>
+
+  </div>
+
+  <!-- EDITAL -->
+
+  <div id="edital" class="tab">
+
+    <div class="card">
+
+      <h3>Novo Edital</h3>
+
+      <input type="text" id="nomeEdital" placeholder="Nome">
+
+      <input type="text" id="banca" placeholder="Banca">
+
+      <input type="text" id="cargo" placeholder="Cargo">
+
+      <input type="date" id="dataProva">
+
+      <button class="action" onclick="addEdital()">
+        Salvar Edital
+      </button>
+
+      <div id="listaEditais"></div>
+
+    </div>
+
+  </div>
 
 </div>
 
 <script>
 
-function openTab(tab,event){
+  function openTab(tab,event){
 
- document.querySelectorAll('.tab-content')
- .forEach(el=>el.classList.remove('active'));
+    document.querySelectorAll('.tab')
+    .forEach(t=>t.classList.remove('active'));
 
- document.querySelectorAll('.tab-btn')
- .forEach(el=>el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn')
+    .forEach(b=>b.classList.remove('active'));
 
- document.getElementById(tab)
- .classList.add('active');
+    document.getElementById(tab)
+    .classList.add('active');
 
- event.target.classList.add('active');
-}
+    event.target.classList.add('active');
+  }
 
-let editais = JSON.parse(localStorage.getItem('editais')) || [];
-let materias = JSON.parse(localStorage.getItem('materias')) || [];
-let tempos = JSON.parse(localStorage.getItem('tempos')) || [];
+  function toggleDark(){
 
-function salvarDados(){
-localStorage.setItem('editais',JSON.stringify(editais));
-localStorage.setItem('materias',JSON.stringify(materias));
-localStorage.setItem('tempos',JSON.stringify(tempos));
-}
+    document.body.classList.toggle('dark');
 
-function addEdital(){
+    localStorage.setItem(
+      'dark',
+      document.body.classList.contains('dark')
+    );
+  }
 
-const edital = {
-nome:document.getElementById('nomeConcurso').value,
-banca:document.getElementById('banca').value,
-cargo:document.getElementById('cargo').value,
-data:document.getElementById('dataProva').value
-};
+  if(localStorage.getItem('dark') === 'true'){
+    document.body.classList.add('dark');
+  }
 
-editais.push(edital);
-salvarDados();
-renderEditais();
-}
+  let materias =
+  JSON.parse(localStorage.getItem('materias')) || [];
 
-function renderEditais(){
+  let editais =
+  JSON.parse(localStorage.getItem('editais')) || [];
 
-const lista = document.getElementById('listaEditais');
-lista.innerHTML = '';
+  let tempos =
+  JSON.parse(localStorage.getItem('tempos')) || [];
 
-editais.forEach((e,index)=>{
+  let tasks =
+  JSON.parse(localStorage.getItem('tasks')) || [];
 
-lista.innerHTML += `
-<div class="edital-item">
-<h4>${e.nome}</h4>
-<p>${e.banca}</p>
-<p>${e.cargo}</p>
-<p>${e.data}</p>
+  function salvarTudo(){
 
-<button class="action" onclick="selecionarEdital(${index})">
-Selecionar
-</button>
+    localStorage.setItem(
+      'materias',
+      JSON.stringify(materias)
+    );
 
-<button class="action" onclick="deletarEdital(${index})">
-Excluir
-</button>
-</div>
-`;
+    localStorage.setItem(
+      'editais',
+      JSON.stringify(editais)
+    );
 
-});
-}
+    localStorage.setItem(
+      'tempos',
+      JSON.stringify(tempos)
+    );
 
-function selecionarEdital(index){
+    localStorage.setItem(
+      'tasks',
+      JSON.stringify(tasks)
+    );
+  }
 
-localStorage.setItem('ativo',JSON.stringify(editais[index]));
+  // EDITAIS
 
-const ativo = editais[index];
+  function addEdital(){
 
-document.getElementById('concursoAtivo').innerText = ativo.nome;
+    const edital = {
 
-atualizarCountdown(ativo.data);
-}
+      nome:
+      document.getElementById('nomeEdital').value,
 
-function deletarEdital(index){
+      banca:
+      document.getElementById('banca').value,
 
-if(confirm('Deseja excluir este edital?')){
-editais.splice(index,1);
-salvarDados();
-renderEditais();
-}
-}
+      cargo:
+      document.getElementById('cargo').value,
 
-function atualizarCountdown(data){
+      data:
+      document.getElementById('dataProva').value
+    };
 
-const prova = new Date(data);
-const hoje = new Date();
+    editais.push(edital);
 
-const dias = Math.ceil((prova-hoje)/(1000*60*60*24));
+    salvarTudo();
 
-document.getElementById('countdown').innerText =
-`${dias} dias para a prova`;
-}
+    renderEditais();
+  }
 
-function addMateria(){
+  function renderEditais(){
 
-const materia = {
-nome:document.getElementById('novaMateria').value,
-incidencia:document.getElementById('incidencia').value
-};
+    const lista =
+    document.getElementById('listaEditais');
 
-materias.push(materia);
+    lista.innerHTML='';
 
-salvarDados();
-renderMaterias();
-}
+    editais.forEach((e,index)=>{
 
-function renderMaterias(){
+      lista.innerHTML += `
 
-const lista = document.getElementById('listaMaterias');
-lista.innerHTML='';
+      <div class="item">
 
-materias.forEach((m,index)=>{
+        <h4>${e.nome}</h4>
 
-let cor = 'blue';
+        <p>${e.banca}</p>
 
-if(m.incidencia==='Média') cor='yellow';
-if(m.incidencia==='Baixa') cor='red';
+        <p>${e.cargo}</p>
 
-lista.innerHTML += `
-<div class="edital-item">
-<h4>${m.nome}</h4>
-<span class="badge ${cor}">${m.incidencia}</span>
+        <p>${e.data}</p>
 
-<button class="action" onclick="removerMateria(${index})">
-Excluir
-</button>
-</div>
-`;
-});
-}
+        <div class="actions">
 
-function removerMateria(index){
+          <button class="small blue"
+          onclick="selecionarEdital(${index})">
 
-if(confirm('Excluir matéria?')){
-materias.splice(index,1);
-salvarDados();
-renderMaterias();
-}
-}
+            Selecionar
 
-function salvarTempo(){
+          </button>
 
-const horas = document.getElementById('horas').value;
-const questoes = Number(document.getElementById('questoes').value);
-const erros = Number(document.getElementById('erros').value);
+          <button class="small delete"
+          onclick="deletarEdital(${index})">
 
-const percentual = (((questoes-erros)/questoes)*100).toFixed(1);
+            Excluir
 
-const registro = {
-horas,
-questoes,
-erros,
-percentual
-};
+          </button>
 
-tempos.push(registro);
+        </div>
 
-salvarDados();
-renderTempo();
-}
+      </div>
 
-function renderTempo(){
+      `;
+    });
+  }
 
-const historico = document.getElementById('historico');
-historico.innerHTML='';
+  function selecionarEdital(index){
 
-let totalMinutos = 0;
+    localStorage.setItem(
+      'ativo',
+      JSON.stringify(editais[index])
+    );
 
-tempos.forEach(t=>{
+    atualizarDashboard();
+  }
 
-const partes = t.horas.split(':');
-const minutos = Number(partes[0])*60 + Number(partes[1]);
+  function deletarEdital(index){
 
-totalMinutos += minutos;
+    if(confirm('Excluir edital?')){
 
-let cor='green';
+      editais.splice(index,1);
 
-if(t.percentual < 70) cor='red';
-else if(t.percentual <=80) cor='yellow';
+      salvarTudo();
 
-historico.innerHTML += `
-<div class="edital-item">
-<p>Horas: ${t.horas}</p>
-<p>Questões: ${t.questoes}</p>
-<p class="${cor}">Acertos: ${t.percentual}%</p>
-</div>
-`;
-});
+      renderEditais();
+    }
+  }
 
-const h = Math.floor(totalMinutos/60);
-const m = totalMinutos%60;
+  // MATÉRIAS
 
-document.getElementById('horasTotal').innerText =
-`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}h`;
-}
+  function addMateria(){
 
-function allowDrop(ev){
-ev.preventDefault();
-}
+    const materia = {
 
-function drag(ev){
-ev.dataTransfer.setData('text',ev.target.id);
-}
+      nome:
+      document.getElementById('materiaNome').value,
 
-function drop(ev){
+      incidencia:
+      document.getElementById('incidencia').value
+    };
 
- ev.preventDefault();
+    materias.push(materia);
 
- const data = ev.dataTransfer.getData('text');
+    salvarTudo();
 
- const card = document.getElementById(data);
+    renderMaterias();
+  }
 
- if(ev.target.classList.contains('column')){
- ev.target.appendChild(card);
- }
-}
+  function renderMaterias(){
 
-renderEditais();
-renderMaterias();
-renderTempo();
+    const lista =
+    document.getElementById('listaMaterias');
 
-const ativo = JSON.parse(localStorage.getItem('ativo'));
+    lista.innerHTML='';
 
-if(ativo){
-document.getElementById('concursoAtivo').innerText = ativo.nome;
-atualizarCountdown(ativo.data);
-}
+    document.getElementById('totalMaterias')
+    .innerText = materias.length;
+
+    materias.forEach((m,index)=>{
+
+      let cor='green';
+
+      if(m.incidencia==='Média') cor='yellow';
+      if(m.incidencia==='Baixa') cor='red';
+
+      lista.innerHTML += `
+
+      <div class="item">
+
+        <h4>${m.nome}</h4>
+
+        <span class="badge ${cor}">
+          ${m.incidencia}
+        </span>
+
+        <div class="actions">
+
+          <button class="small delete"
+          onclick="deleteMateria(${index})">
+
+            Excluir
+
+          </button>
+
+        </div>
+
+      </div>
+
+      `;
+    });
+  }
+
+  function deleteMateria(index){
+
+    if(confirm('Excluir matéria?')){
+
+      materias.splice(index,1);
+
+      salvarTudo();
+
+      renderMaterias();
+    }
+  }
+
+  // TEMPO
+
+  function salvarTempo(){
+
+    const horas =
+    document.getElementById('horas').value;
+
+    const questoes =
+    Number(document.getElementById('questoes').value);
+
+    const erros =
+    Number(document.getElementById('erros').value);
+
+    const percentual =
+    (((questoes-erros)/questoes)*100).toFixed(1);
+
+    tempos.push({
+      horas,
+      questoes,
+      erros,
+      percentual
+    });
+
+    salvarTudo();
+
+    renderTempo();
+
+    atualizarDashboard();
+  }
+
+  function renderTempo(){
+
+    const historico =
+    document.getElementById('historico');
+
+    historico.innerHTML='';
+
+    let totalQuestoes = 0;
+
+    tempos.forEach(t=>{
+
+      totalQuestoes += t.questoes;
+
+      let cor='green';
+
+      if(t.percentual < 70) cor='red';
+      else if(t.percentual <=80) cor='yellow';
+
+      historico.innerHTML += `
+
+      <div class="item">
+
+        <p>Horas: ${t.horas}</p>
+
+        <p>Questões: ${t.questoes}</p>
+
+        <span class="badge ${cor}">
+          ${t.percentual}%
+        </span>
+
+      </div>
+
+      `;
+    });
+
+    document.getElementById('totalQuestoes')
+    .innerText = totalQuestoes;
+  }
+
+  // TASKS
+
+  function addTask(){
+
+    const titulo =
+    document.getElementById('tituloTask').value;
+
+    const tipo =
+    document.getElementById('tipoEstudo').value;
+
+    const id =
+    Date.now();
+
+    tasks.push({
+      id,
+      titulo,
+      tipo,
+      status:'Iniciado'
+    });
+
+    salvarTudo();
+
+    renderTasks();
+  }
+
+  function renderTasks(){
+
+    document.querySelectorAll('.column')
+    .forEach(c=>{
+
+      c.querySelectorAll('.task')
+      .forEach(t=>t.remove());
+    });
+
+    tasks.forEach(task=>{
+
+      const div =
+      document.createElement('div');
+
+      div.className='task';
+
+      div.draggable=true;
+
+      div.id=task.id;
+
+      div.ondragstart=drag;
+
+      div.innerHTML = `
+
+      <h4>${task.titulo}</h4>
+
+      <span class="badge blue">
+        ${task.tipo}
+      </span>
+
+      <div class="actions">
+
+        <button class="small delete"
+        onclick="deleteTask(${task.id})">
+
+          Excluir
+
+        </button>
+
+      </div>
+
+      `;
+
+      const coluna =
+      [...document.querySelectorAll('.column')]
+      .find(c=>c.dataset.status===task.status);
+
+      coluna.appendChild(div);
+    });
+  }
+
+  function deleteTask(id){
+
+    if(confirm('Excluir tópico?')){
+
+      tasks =
+      tasks.filter(t=>t.id !== id);
+
+      salvarTudo();
+
+      renderTasks();
+    }
+  }
+
+  function allowDrop(ev){
+    ev.preventDefault();
+  }
+
+  function drag(ev){
+    ev.dataTransfer.setData(
+      'text',
+      ev.target.id
+    );
+  }
+
+  function drop(ev){
+
+    ev.preventDefault();
+
+    const id =
+    ev.dataTransfer.getData('text');
+
+    const card =
+    document.getElementById(id);
+
+    const coluna =
+    ev.currentTarget;
+
+    coluna.appendChild(card);
+
+    const status =
+    coluna.dataset.status;
+
+    tasks = tasks.map(t=>{
+
+      if(t.id == id){
+        t.status = status;
+      }
+
+      return t;
+    });
+
+    salvarTudo();
+  }
+
+  // DASHBOARD
+
+  function atualizarDashboard(){
+
+    const ativo =
+    JSON.parse(localStorage.getItem('ativo'));
+
+    if(ativo){
+
+      document.getElementById('ativoNome')
+      .innerText = ativo.nome;
+
+      const prova =
+      new Date(ativo.data);
+
+      const hoje =
+      new Date();
+
+      const dias =
+      Math.ceil(
+        (prova-hoje)/(1000*60*60*24)
+      );
+
+      document.getElementById('countdown')
+      .innerText =
+      `${dias} dias para a prova`;
+    }
+
+    let totalMin = 0;
+
+    tempos.forEach(t=>{
+
+      const p = t.horas.split(':');
+
+      totalMin +=
+      Number(p[0])*60 + Number(p[1]);
+    });
+
+    const h =
+    Math.floor(totalMin/60);
+
+    const m =
+    totalMin%60;
+
+    document.getElementById('horasTotal')
+    .innerText =
+    `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}h`;
+
+    gerarGrafico();
+  }
+
+  // CHART
+
+  let chart;
+
+  function gerarGrafico(){
+
+    const ctx =
+    document.getElementById('graficoHoras');
+
+    const labels =
+    tempos.map((_,i)=>`Sessão ${i+1}`);
+
+    const data =
+    tempos.map(t=>{
+
+      const p = t.horas.split(':');
+
+      return (
+        Number(p[0]) +
+        Number(p[1])/60
+      );
+    });
+
+    if(chart){
+      chart.destroy();
+    }
+
+    chart = new Chart(ctx,{
+      type:'line',
+      data:{
+        labels,
+        datasets:[{
+          label:'Horas Estudadas',
+          data
+        }]
+      }
+    });
+  }
+
+  renderEditais();
+  renderMaterias();
+  renderTempo();
+  renderTasks();
+  atualizarDashboard();
 
 </script>
+
 </body>
 </html>
-```
-
-Depois:
-
-1. Salve;
-2. Faça commit no GitHub;
-3. Ative GitHub Pages;
-4. O sistema ficará online.
